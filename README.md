@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# EpicMeteo - App Meteo React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descrizione
 
-## Available Scripts
+EpicMeteo è un'applicazione meteo moderna e reattiva costruita con React e Bootstrap. Fornisce previsioni meteorologiche in tempo reale e previsioni a 7 giorni per qualsiasi città nel mondo, con un'interfaccia utente elegante e intuitiva.
 
-In the project directory, you can run:
+## Caratteristiche principali
 
-### `npm start`
+- Ricerca meteo per città e paese
+- Geolocalizzazione per ottenere il meteo della posizione corrente
+- Visualizzazione delle condizioni meteorologiche attuali
+- Previsioni dettagliate per i prossimi 7 giorni
+- Sfondo dinamico che cambia in base alle condizioni meteorologiche
+- Design reattivo per una perfetta visualizzazione su tutti i dispositivi
+- Animazioni fluide per una migliore esperienza utente
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tecnologie utilizzate
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React 18
+- Bootstrap 5
+- React Bootstrap
+- OpenWeather API per i dati meteorologici
+- Pexels API per le immagini di sfondo dinamiche
 
-### `npm test`
+## Installazione
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clona il repository:
+   ```
+   git clone https://github.com/tuousername/epicmeteo.git
+   ```
 
-### `npm run build`
+2. Entra nella directory del progetto:
+   ```
+   cd epicmeteo
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Installa le dipendenze:
+   ```
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Crea un file `.env` nella root del progetto e aggiungi le tue chiavi API:
+   ```
+   REACT_APP_OPENWEATHER_API_KEY=tua_chiave_api_openweather
+   REACT_APP_PEXELS_API_KEY=tua_chiave_api_pexels
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Avvia l'applicazione in modalità sviluppo:
+   ```
+   npm start
+   ```
 
-### `npm run eject`
+## Struttura del progetto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Il progetto è strutturato come segue:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `src/components/`: Contiene tutti i componenti React dell'applicazione
+- `src/styles/`: Contiene i file CSS per lo styling personalizzato
+- `src/__tests__/`: Contiene i file di test per i componenti
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+I componenti principali includono:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `WeatherApp.js`: Il componente principale che gestisce lo stato dell'applicazione e le chiamate API
+- `SearchForm.js`: Gestisce l'input dell'utente per la ricerca delle città
+- `CurrentWeather.js`: Visualizza le condizioni meteorologiche attuali
+- `ForecastList.js`: Mostra le previsioni per i prossimi 7 giorni
+- `WeatherDetails.js`: Fornisce dettagli aggiuntivi sulle condizioni meteorologiche
 
-## Learn More
+## Script disponibili
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Nel file `package.json`, troverai i seguenti script:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+```17:22:package.json
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+- `npm start`: Avvia l'app in modalità sviluppo
+- `npm build`: Crea la versione di produzione dell'app
+- `npm test`: Esegue i test dell'applicazione
+- `npm run eject`: Espone le configurazioni di Create React App (usa con cautela)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Test
 
-### Making a Progressive Web App
+L'applicazione include una suite di test per garantire la qualità del codice. Puoi eseguire i test con il comando:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm test
+```

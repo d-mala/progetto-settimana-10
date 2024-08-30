@@ -1,0 +1,109 @@
+.weather-app {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.background-overlay.loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.weather-app.background-loaded {
+  opacity: 1;
+}
+
+.weather-app > * {
+  position: relative;
+  z-index: 2;
+}
+
+.transparent-card {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(10px);
+  border: none !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.transparent-inner-card {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(5px);
+  border: none !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.weather-icon-large {
+  width: 150px;
+  height: 150px;
+}
+
+.day-card {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(5px);
+  border: none !important;
+  border-radius: var(--border-radius) !important;
+  transition: all 0.3s ease;
+}
+
+.day-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.slide-in {
+  animation: slideInFromBottom 0.5s ease-out;
+}
+
+.smooth-transition {
+  transition: all 0.3s ease;
+}
+
+/* Fallback per browser che non supportano backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .transparent-card,
+  .transparent-inner-card,
+  .day-card {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+:root {
+  --border-radius: 15px;
+}
+
+.form-control,
+.btn {
+  border-radius: calc(var(--border-radius) / 2) !important;
+}
