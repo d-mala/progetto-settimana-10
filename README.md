@@ -4,6 +4,10 @@
 
 EpicMeteo è un'applicazione meteo moderna e reattiva costruita con React e Bootstrap. Fornisce previsioni meteorologiche in tempo reale e previsioni a 7 giorni per qualsiasi città nel mondo, con un'interfaccia utente elegante e intuitiva.
 
+## Demo
+
+Puoi provare l'applicazione live qui: [EpicMeteo](https://epic-meteo-react.vercel.app/)
+
 ## Caratteristiche principali
 
 - Ricerca meteo per città e paese
