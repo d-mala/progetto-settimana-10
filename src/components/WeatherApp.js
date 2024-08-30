@@ -99,9 +99,14 @@ function WeatherApp() {
   };
 
   const handleCitySearch = (city, country) => {
-    let query = city;
+    if (!city.trim()) {
+      setError("Per favore, inserisci il nome di una località.");
+      return;
+    }
+
+    let query = city.trim();
     if (country) {
-      query += `,${country}`;
+      query += `,${country.trim()}`;
     }
     fetchWeather(query);
     setError('');
@@ -171,13 +176,7 @@ function WeatherApp() {
   return (
     <div 
       className={`weather-app fade-in ${isBackgroundLoaded ? 'background-loaded' : ''}`} 
-      style={{
-        ...getBackgroundStyle(),
-        minHeight: '100vh',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
+      style={getBackgroundStyle()}
     >
       <div className={`background-overlay ${isBackgroundLoaded ? 'loaded' : ''}`}></div>
       <ErrorAlert message={error} onClose={handleErrorClose} />

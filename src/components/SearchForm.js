@@ -7,7 +7,9 @@ function SearchForm({ onSearch, onLocationSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(city, country);
+    if (city.trim()) {
+      onSearch(city, country);
+    }
   };
 
   const handleLocationSearch = () => {
@@ -40,6 +42,7 @@ function SearchForm({ onSearch, onLocationSearch }) {
                 onChange={(e) => setCity(e.target.value)}
                 className="mb-2 shadow-sm"
                 style={{ borderRadius: '20px', height: '50px' }}
+                required
               />
             </Col>
             <Col xs={12} sm={4}>
@@ -61,6 +64,7 @@ function SearchForm({ onSearch, onLocationSearch }) {
                 size="lg"
                 className="shadow hover-lift smooth-transition"
                 style={{ borderRadius: '25px', height: '60px' }}
+                disabled={!city.trim()}
               >
                 Cerca
               </Button>
