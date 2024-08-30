@@ -21,7 +21,6 @@ function WeatherApp() {
   const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false);
 
   const fetchWeather = async (query) => {
-    console.log('fetchWeather chiamata con query:', query);
     if (!API_KEY || API_KEY === 'TUA_CHIAVE_API') {
       setError('Errore: API key non valida. Assicurati di aver configurato correttamente il file .env');
       setWeather(null);
@@ -40,18 +39,15 @@ function WeatherApp() {
       } else if (typeof query === 'object' && query.lat && query.lon) {
         url += `&lat=${query.lat}&lon=${query.lon}`;
       }
-      console.log('URL per la richiesta meteo:', url);
 
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Errore nel recupero dei dati meteo');
       }
       const data = await response.json();
-      console.log('Dati meteo ricevuti:', data);
       setWeather(data);
       setError('');
       setIsError(false);
-      console.log('Chiamata a fetchBackgroundImage con:', data.city.name, data.city.country);
       fetchBackgroundImage(data.city.name, data.city.country);
     } catch (err) {
       setWeather(null);
@@ -64,7 +60,6 @@ function WeatherApp() {
   };
 
   const fetchBackgroundImage = async (cityName, countryName) => {
-    console.log('fetchBackgroundImage chiamata con:', cityName, countryName);
     try {
       const query = `${cityName} ${countryName}`.trim();
       const response = await fetch(`${PEXELS_API_URL}?query=${query}&per_page=15`, {
@@ -73,17 +68,13 @@ function WeatherApp() {
         },
       });
       const data = await response.json();
-      console.log(`Dati immagine ricevuti per "${query}":`, data);
       if (data.photos && data.photos.length > 0) {
         const randomIndex = Math.floor(Math.random() * data.photos.length);
-        console.log(`Impostazione nuova immagine di sfondo per "${query}"`);
         setBackgroundImage(data.photos[randomIndex].src.original);
       } else {
-        console.log('Nessuna immagine trovata per la località, ricerca di immagini di nuvole');
         fetchCloudImage();
       }
     } catch (error) {
-      console.error(`Errore nel recupero dell'immagine di sfondo:`, error);
       fetchCloudImage();
     }
   };
@@ -98,20 +89,16 @@ function WeatherApp() {
       const data = await response.json();
       if (data.photos && data.photos.length > 0) {
         const randomIndex = Math.floor(Math.random() * data.photos.length);
-        console.log('Impostazione immagine di nuvole come sfondo');
         setBackgroundImage(data.photos[randomIndex].src.original);
       } else {
-        console.log('Nessuna immagine di nuvole trovata, impostazione sfondo vuoto');
         setBackgroundImage('');
       }
     } catch (error) {
-      console.error('Errore nel recupero dell\'immagine di nuvole:', error);
       setBackgroundImage('');
     }
   };
 
   const handleCitySearch = (city, country) => {
-    console.log('handleCitySearch chiamata con:', city, country);
     let query = city;
     if (country) {
       query += `,${country}`;
@@ -121,10 +108,8 @@ function WeatherApp() {
   };
 
   const handleLocationSearch = (lat, lon) => {
-    console.log('handleLocationSearch chiamata con:', lat, lon);
     fetchWeather({ lat, lon });
     setError('');
-    // Rimuoviamo la chiamata a fetchBackgroundImage da qui
   };
 
   const getRandomCloudImage = () => {
@@ -152,25 +137,20 @@ function WeatherApp() {
 
   useEffect(() => {
     const getLocationAndFetchWeather = () => {
-      console.log('getLocationAndFetchWeather chiamata');
       setIsLoading(true);
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            console.log('Posizione ottenuta:', position.coords);
             const { latitude, longitude } = position.coords;
             handleLocationSearch(latitude, longitude);
-            // Rimuoviamo la chiamata a fetchBackgroundImage da qui
           },
           (error) => {
-            console.error("Errore nella geolocalizzazione:", error);
             setError("Impossibile ottenere la posizione. Inserisci manualmente una città.");
             setIsLoading(false);
             getRandomCloudImage();
           }
         );
       } else {
-        console.log('Geolocalizzazione non supportata');
         setError("La geolocalizzazione non è supportata dal tuo browser. Inserisci manualmente una città.");
         setIsLoading(false);
         getRandomCloudImage();
@@ -181,7 +161,6 @@ function WeatherApp() {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect per backgroundImage chiamato con:', backgroundImage);
     if (backgroundImage) {
       const img = new Image();
       img.src = backgroundImage;
