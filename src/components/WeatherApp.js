@@ -19,6 +19,7 @@ function WeatherApp() {
   const [backgroundImage, setBackgroundImage] = useState('');
   const [isError, setIsError] = useState(false);
   const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const fetchWeather = async (query) => {
     if (!API_KEY || API_KEY === 'TUA_CHIAVE_API') {
@@ -126,6 +127,7 @@ function WeatherApp() {
   };
 
   const handleBackgroundLoad = () => {
+    setIsImageLoading(false);
     setIsBackgroundLoaded(true);
   };
 
@@ -137,7 +139,19 @@ function WeatherApp() {
         backgroundPosition: 'center',
       };
     }
-    return backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : {};
+    if (backgroundImage) {
+      return { 
+        backgroundImage: `url(${backgroundImage})`,
+        opacity: isImageLoading ? 0 : 1,
+        transition: 'opacity 0.5s ease-in-out'
+      };
+    }
+    // Sfondo predefinito: gradiente blu-azzurro
+    return {
+      background: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
   };
 
   useEffect(() => {
@@ -167,6 +181,7 @@ function WeatherApp() {
 
   useEffect(() => {
     if (backgroundImage) {
+      setIsImageLoading(true);
       const img = new Image();
       img.src = backgroundImage;
       img.onload = handleBackgroundLoad;
@@ -174,37 +189,39 @@ function WeatherApp() {
   }, [backgroundImage]);
 
   return (
-    <div 
-      className={`weather-app fade-in ${isBackgroundLoaded ? 'background-loaded' : ''}`} 
-      style={getBackgroundStyle()}
-    >
-      <div className={`background-overlay ${isBackgroundLoaded ? 'loaded' : ''}`}></div>
-      <ErrorAlert message={error} onClose={handleErrorClose} />
-      <Container fluid className="py-5">
-        <Row className="justify-content-center">
-          <Col xs={12} sm={11} md={10} lg={8} xl={7} xxl={6}>
-            <Card className="transparent-card shadow-lg">
-              <Card.Body className="p-4">
-                <div className="text-center mb-4">
-                  <h1 className="display-4 fw-bold">EpicMeteo</h1>
-                  <p className="lead">Scopri il meteo in tempo reale per qualsiasi città nel mondo.</p>
-                </div>
-                <SearchForm 
-                  onSearch={handleCitySearch} 
-                  onLocationSearch={handleLocationSearch}
-                />
-                {isLoading && <LoadingSpinner />}
-                {!isLoading && weather && (
-                  <>
-                    <CurrentWeather currentWeather={weather.list[0]} city={weather.city} />
-                    <ForecastList forecast={weather.list} />
-                  </>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+    <div className="weather-app-container">
+      <div 
+        className={`weather-app-background ${isBackgroundLoaded ? 'loaded' : ''}`} 
+        style={getBackgroundStyle()}
+      ></div>
+      <div className="weather-app-content">
+        <ErrorAlert message={error} onClose={handleErrorClose} />
+        <Container fluid className="py-5">
+          <Row className="justify-content-center">
+            <Col xs={12} sm={11} md={10} lg={8} xl={7} xxl={6}>
+              <Card className="transparent-card shadow-lg">
+                <Card.Body className="p-4">
+                  <div className="text-center mb-4">
+                    <h1 className="display-4 fw-bold">EpicMeteo</h1>
+                    <p className="lead">Scopri il meteo in tempo reale per qualsiasi città nel mondo.</p>
+                  </div>
+                  <SearchForm 
+                    onSearch={handleCitySearch} 
+                    onLocationSearch={handleLocationSearch}
+                  />
+                  {isLoading && <LoadingSpinner />}
+                  {!isLoading && weather && (
+                    <>
+                      <CurrentWeather currentWeather={weather.list[0]} city={weather.city} />
+                      <ForecastList forecast={weather.list} />
+                    </>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 }

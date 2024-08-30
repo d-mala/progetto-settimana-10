@@ -1,38 +1,31 @@
-.weather-app {
+.weather-app-container {
+  position: relative;
   min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   display: flex;
   align-items: center;
-  position: relative;
-  transition: opacity 0.5s ease-in-out;
 }
 
-.background-overlay {
+.weather-app-background {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ffffff;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 1;
-}
-
-.background-overlay.loaded {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   opacity: 0;
-  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.weather-app.background-loaded {
+.weather-app-background.loaded {
   opacity: 1;
 }
 
-.weather-app > * {
+.weather-app-content {
   position: relative;
   z-index: 2;
+  width: 100%;
 }
 
 .transparent-card {
