@@ -18,6 +18,17 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+.weather-app-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Overlay scuro */
+  z-index: 1;
+}
+
 .weather-app-background.loaded {
   opacity: 1;
 }
@@ -30,6 +41,7 @@
 
 .transparent-card {
   background-color: rgba(255, 255, 255, 0.7) !important;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: none !important;
   border-radius: var(--border-radius) !important;
@@ -37,18 +49,15 @@
 
 .transparent-inner-card {
   background-color: rgba(255, 255, 255, 0.5) !important;
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border: none !important;
   border-radius: var(--border-radius) !important;
 }
 
-.weather-icon-large {
-  width: 150px;
-  height: 150px;
-}
-
 .day-card {
   background-color: rgba(255, 255, 255, 0.6) !important;
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border: none !important;
   border-radius: var(--border-radius) !important;
@@ -97,6 +106,30 @@
 }
 
 .form-control,
-.btn {
-  border-radius: calc(var(--border-radius) / 2) !important;
+.btn,
+.current-weather-card,
+.current-weather-card .current-weather-details-card,
+.transparent-card,
+.transparent-inner-card,
+.day-card {
+  border-radius: var(--border-radius) !important;
+}
+
+.current-weather-card {
+  background: linear-gradient(135deg, #52c1d4, #1e66ec);
+  border: none !important;
+}
+
+.current-weather-card .current-weather-details-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none !important;
+}
+
+.current-weather-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.current-weather-details-card.less-transparent {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: #333;
 }

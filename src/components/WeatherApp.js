@@ -146,7 +146,6 @@ function WeatherApp() {
         transition: 'opacity 0.5s ease-in-out'
       };
     }
-    // Sfondo predefinito: gradiente blu-azzurro
     return {
       background: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)',
       backgroundSize: 'cover',

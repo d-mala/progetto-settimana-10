@@ -21,10 +21,10 @@ function CurrentWeather({ currentWeather, city }) {
   );
 
   return (
-    <Card className="transparent-inner-card mb-4 slide-in">
-      <Card.Body className="p-4">
+    <Card className="current-weather-card mb-4 slide-in">
+      <Card.Body className="p-4 text-white">
         <h2 className="fs-1 fw-bold mb-1">{city.name}, {city.country}</h2>
-        <p className="fs-5 text-muted mb-4">{getCurrentDate()}</p>
+        <p className="fs-5 mb-4">{getCurrentDate()}</p>
         <Row className="align-items-center">
           <Col md={6} className="text-center mb-4 mb-md-0">
             <img 
@@ -36,7 +36,7 @@ function CurrentWeather({ currentWeather, city }) {
             <p className="fs-4 fst-italic">{currentWeather.weather[0].description}</p>
           </Col>
           <Col md={6}>
-            <Card className="transparent-inner-card">
+            <Card className="current-weather-details-card less-transparent">
               <Card.Body>
                 <h4 className="mb-3">Dettagli meteo</h4>
                 <WeatherDetail 

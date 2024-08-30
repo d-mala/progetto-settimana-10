@@ -11,7 +11,6 @@ function ForecastList({ forecast }) {
     return days[new Date(date).getDay()];
   };
 
-  // Raggruppa le previsioni per giorno e prendi solo i prossimi 7 giorni
   const groupedForecast = forecast.reduce((acc, item) => {
     const date = item.dt_txt.split(' ')[0];
     if (!acc[date] && Object.keys(acc).length < 7) {
